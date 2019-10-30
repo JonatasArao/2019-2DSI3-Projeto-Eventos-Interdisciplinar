@@ -12,6 +12,21 @@ CREATE TABLE tb_administrador(
     CONSTRAINT EMAIL_ADMIN_UNICO UNIQUE (nm_email)
 );
 
+CREATE TABLE tb_usuario(
+	cd_usuario INT PRIMARY KEY AUTO_INCREMENT,
+	nm_usuario VARCHAR(45),
+	nm_email VARCHAR(45),
+  CONSTRAINT EMAIL_USER_UNICO UNIQUE(nm_email),
+	cd_senha VARCHAR(50),
+    dt_nascimento DATE NOT NULL,
+    cd_cpf VARCHAR(11) NOT NULL,
+  CONSTRAINT CPF_USER_UNICO UNIQUE(cd_cpf),
+    cd_rg VARCHAR(9) NOT NULL,
+    dt_cadastro TIMESTAMP NOT NULL
+    DEFAULT CURRENT_TIMESTAMP
+    ON UPDATE CURRENT_TIMESTAMP
+);
+
 CREATE TABLE tb_palestrante(
 	cd_palestrante INT AUTO_INCREMENT,
     nm_palestrante VARCHAR(60)  NOT NULL,
