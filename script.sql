@@ -63,3 +63,12 @@ create table tb_cidade(
     CONSTRAINT CIDADE_ESTADO_FK
     FOREIGN KEY(id_estado) REFERENCES tb_estado(cd_estado)
     );
+    
+create table tb_patrocinador(
+	cd_patrocinador INT PRIMARY KEY AUTO_INCREMENT,
+    nm_patrocinador VARCHAR(45) NOT NULL,
+    ds_patrocinador LONGTEXT NOT NULL,
+    img_patrocinador VARCHAR(150) NOT NULL,
+    FOREIGN KEY (id_administrador) REFERENCES 
+    tb_administrador(cd_administrador)
+);
