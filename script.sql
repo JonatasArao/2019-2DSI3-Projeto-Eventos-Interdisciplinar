@@ -33,3 +33,17 @@ CREATE TABLE tb_palestrante(
     ON UPDATE CASCADE
     ON DELETE CASCADE
 );
+
+CREATE TABLE tb_organizacao(
+	cd_organizacao INT AUTO_INCREMENT,
+    nm_organizacao VARCHAR(45) NOT NULL,
+    ds_organizacao LONGTEXT,
+    img_organizacao VARCHAR(150) NOT NULL,
+    id_administrador INT NOT NULL,
+    PRIMARY KEY(cd_organizacao),
+    CONSTRAINT ADM_ORGANIZ_FK
+    FOREIGN KEY (id_administrador) REFERENCES 
+    tb_administrador(cd_administrador)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE
+);
