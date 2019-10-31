@@ -83,6 +83,20 @@ create table tb_patrocinador(
     nm_patrocinador VARCHAR(45) NOT NULL,
     ds_patrocinador LONGTEXT NOT NULL,
     img_patrocinador VARCHAR(150) NOT NULL,
+    id_administrador INT NOT NULL,
+    CONSTRAINT ADM_PATROC_FK
     FOREIGN KEY (id_administrador) REFERENCES 
     tb_administrador(cd_administrador)
+);
+
+create table tb_inscricao(
+	cd_inscricao INT PRIMARY KEY AUTO_INCREMENT,
+    id_tipo INT NOT NULL,
+    id_usuario INT NOT NULL,
+    CONSTRAINT TIPO_INSCRICAO_FK
+    FOREIGN KEY (id_tipo) REFERENCES 
+    tb_tipo_evento(cd_tipo),
+    CONSTRAINT USER_INSCRICAO_FK
+    FOREIGN KEY (id_usuario) REFERENCES 
+    tb_usuario(cd_usuario)
 );
