@@ -42,6 +42,7 @@ CREATE TABLE tb_palestrante(
     ON UPDATE CURRENT_TIMESTAMP,
     id_administrador INT NOT NULL,
     ds_palestrante LONGTEXT,
+    PRIMARY KEY(cd_palestrante),
     CONSTRAINT ADM_PALEST_FK
     FOREIGN KEY (id_administrador) REFERENCES 
     tb_administrador(cd_administrador)
@@ -112,7 +113,7 @@ create table tb_tipo_evento(
     CONSTRAINT PALEST_TIPO_FK
     FOREIGN KEY(id_palestrante) REFERENCES tb_palestrante(cd_palestrante),
     CONSTRAINT EVENTO_TIPO_FK
-    FOREIGN KEY(tb_evento) REFERENCES tb_evento(cd_evento)
+    FOREIGN KEY(id_evento) REFERENCES tb_evento(cd_evento)
 	);
   
  create table tb_inscricao(
