@@ -64,6 +64,69 @@ create table tb_cidade(
     FOREIGN KEY(id_estado) REFERENCES tb_estado(cd_estado)
     );
     
+create table tb_categoria(
+	cd_categoria INT AUTO_INCREMENT,
+    nm_categoria VARCHAR(45),
+    ds_categoria LONGTEXT,
+    PRIMARY KEY(cd_categoria)
+    );
+    
+create table tb_evento(
+	cd_evento INT AUTO_INCREMENT,
+    nm_evento VARCHAR(45) NOT NULL,
+    id_categoria INT NOT NULL,
+    nm_endereco VARCHAR(100) NOT NULL,
+    nr_endereco VARCHAR(12) NOT NULL,
+    nm_complemento VARCHAR(45),
+    ds_referencia VARCHAR(100),
+    nm_bairro VARCHAR(45),
+    id_cidade INT NOT NULL,
+    dt_inicio DATE NOT NULL,
+    hr_inicio TIME NOT NULL,
+    dt_final DATE,
+    hr_final TIME NOT NULL,
+    dt_cadastro DATETIME NOT NULL,
+    id_administrador INT NOT NULL,
+    PRIMARY KEY(cd_evento),
+    CONSTRAINT ADM_EVENTO_FK
+    FOREIGN KEY(id_administrador) REFERENCES tb_administrador(cd_administrador),
+    CONSTRAINT CID_EVENTO_FK
+    FOREIGN KEY(id_cidade) REFERENCES tb_cidade(cd_cidade),
+    CONSTRAINT CAT_EVENTO_FK
+    FOREIGN KEY(id_categoria) REFERENCES tb_categoria(cd_categoria)
+    );
+    
+create table tb_tipo_evento(
+	cd_tipo INT AUTO_INCREMENT,
+    nm_tipo VARCHAR(45),
+    ds_tipo LONGTEXT NOT NULL,
+    id_palestrante INT NOT NULL,
+    id_evento INT NOT NULL,
+    nm_local VARCHAR(45),
+    dt_inicio DATE NOT NULL,
+    hr_inicio TIME NOT NULL,
+    dt_fim DATE,
+    hr_fim TIME NOT NULL,
+    qt_participante INT NOT NULL,
+    PRIMARY KEY(cd_tipo),
+    CONSTRAINT PALEST_TIPO_FK
+    FOREIGN KEY(id_palestrante) REFERENCES tb_palestrante(cd_palestrante),
+    CONSTRAINT EVENTO_TIPO_FK
+    FOREIGN KEY(tb_evento) REFERENCES tb_evento(cd_evento)
+	);
+  
+ create table tb_inscricao(
+	cd_inscricao INT PRIMARY KEY AUTO_INCREMENT,
+    id_tipo INT NOT NULL,
+    id_usuario INT NOT NULL,
+    CONSTRAINT TIPO_INSCRICAO_FK
+    FOREIGN KEY (id_tipo) REFERENCES 
+    tb_tipo_evento(cd_tipo),
+    CONSTRAINT USER_INSCRICAO_FK
+    FOREIGN KEY (id_usuario) REFERENCES 
+    tb_usuario(cd_usuario)
+);
+
 CREATE TABLE tb_organizacao(
 	cd_organizacao INT AUTO_INCREMENT,
     nm_organizacao VARCHAR(45) NOT NULL,
@@ -89,14 +152,16 @@ create table tb_patrocinador(
     tb_administrador(cd_administrador)
 );
 
-create table tb_inscricao(
-	cd_inscricao INT PRIMARY KEY AUTO_INCREMENT,
-    id_tipo INT NOT NULL,
-    id_usuario INT NOT NULL,
-    CONSTRAINT TIPO_INSCRICAO_FK
-    FOREIGN KEY (id_tipo) REFERENCES 
-    tb_tipo_evento(cd_tipo),
-    CONSTRAINT USER_INSCRICAO_FK
-    FOREIGN KEY (id_usuario) REFERENCES 
-    tb_usuario(cd_usuario)
-);
+    
+create table tb_evento_organizacao(
+	cd_evento INT AUTO_INCREMENT,
+    id_organizacao INT NOT NULL,
+    id_patrocinador INT NOT NULL,
+    PRIMARY KEY(cd_evento),
+    CONSTRAINT EVEORG_EVENTO_FK
+    FOREIGN KEY(cd_evento) REFERENCES tb_evento(cd_evento),
+	CONSTRAINT EVEORG_ORG_FK
+    FOREIGN KEY(id_organizacao) REFERENCES tb_organizacao(cd_organizacao),
+	CONSTRAINT EVEORG_PATROC_FK
+    FOREIGN KEY(id_patrocinador) REFERENCES tb_patrocinador(cd_patrocinador)
+    );
