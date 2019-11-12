@@ -5,11 +5,21 @@ if($_POST){
 	switch ($_GET['acao']) {
 		case 'cadastrar':
 			//chamamos o método cadastrar
-			if(CadastrarAdministrador($_POST['nome'],$_POST['email'],$_POST['senha'])){
+			$nome = $_POST['nome'];
+			$email = $_POST['email'];
+			$senha = $_POST['senha'];
+			if(CadastrarAdministrador($nome,$email,$senha)){
 				echo 'Cadastrado com Sucesso';
 			}else{
 				echo 'Erro ao cadastrar';
 			}
+			break;
+
+		case 'login':
+			//chamamos o método login
+			$login = $_POST['lemail'];
+			$senha = $_POST['lsenha'];
+			Login($login,$senha);
 			break;
 
 		case 'listar':
