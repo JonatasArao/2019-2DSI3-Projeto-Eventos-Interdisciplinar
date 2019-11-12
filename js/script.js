@@ -17,7 +17,13 @@ $(document).on('submit','#lAdministrador',function(){
 		type: 'POST',
 		data: dados,
 		success:function(retorno){
-			console.log(user.nome);
+			var user = JSON.parse(retorno);
+			sessionStorage.setItem('user', retorno);
+			localStorage.setItem('id', user.id);
+			localStorage.setItem('nome', user.nome);
+			localStorage.setItem('email', user.email);
+			localStorage.setItem('senha', user.senha);
+			window.location = 'home.html';
 		}
 	});
 	return false;
