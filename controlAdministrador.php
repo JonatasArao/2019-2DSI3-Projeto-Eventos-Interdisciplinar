@@ -31,6 +31,12 @@ if($_POST){
 			break;
 
 		case 'excluir':
+			$id = $_POST['id'];
+			if(ExcluirAdministrador($id)){
+				echo "Excluido";
+			}else{
+				echo "Erro ao excluir";
+			}
 			//chamamos o método excluir
 			break;
 		
