@@ -1,0 +1,47 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <section class="container">
+
+      <div class="row py-3 mt-3 bg-primary text-white">
+        <div class="col-md-2 text-center">SGE</div>
+        <div class="col-md-10 text-center">Sistema de Gerenciamento de Eventos</div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-2 py-2 bg-info text-white" id="menu"></div>
+        <div class="col-md-10 text-center">
+          <h1 id="welcome">Bem Vindo</h1>
+          <div id="dashboard"></div>
+        </div>
+      </div>
+      
+    </section>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/script.js"></script>
+    <script>
+      $(document).ready(function(){
+        $('#menu').load('menu.inc');
+        $('#welcome').append(', '+localStorage.getItem('nome'));
+      });
+
+      $(document).on('click','.excluir',function(){
+        var id = $(this).attr('id');
+        var url = 'controlAdministrador.php?acao=excluir&id='+id;
+        $.post(url,function(retorno){
+          dismiss(retorno);
+        });
+      });
+    </script>
+  </body>
+
+</html>
