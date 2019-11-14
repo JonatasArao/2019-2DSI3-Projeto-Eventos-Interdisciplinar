@@ -34,7 +34,7 @@ include 'header.php';
 
 <?php
 
-if(isset($_POST['email'], ))
+if(isset($_POST['email'] ));
 
 ?>
 
